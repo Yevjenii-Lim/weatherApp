@@ -1,29 +1,30 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { addLocation, setTemperature, setTimeSunRice } from '../store';
+import { addLocation, setAllData, setIcon, setTemperature, setTimeSunRice } from '../store';
+import { getIcon, getLocation, getWeather } from './DAL/api';
 
-let getLocation = "https://us1.locationiq.com/v1/reverse.php?key=pk.e6819ac87d4591abdc47a03cccc19aa8&lat="
-let getWeather = "https://api.openweathermap.org/data/2.5/weather?q=";
-let apiKeyWeather = "&appid=f8705a4ac77ebcd799c4a23561fad49d"
+
 let Header = (props) => {
-    // console.log(props)
-    // let [city, setCity] = useState('')
+    let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
+    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+    let date = new Date(props.state.dt * 1000).getDate() + " " + props.state.months[new Date(props.state.dt * 1000).getMonth()] 
     let [time, setTime] = useState('')
     useEffect(async () => {
         timeReset()
-        // let weather  = await axios.get("http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=f8705a4ac77ebcd799c4a23561fad49d")
-        // console.log( weather)
+
     }, [])
 
     let success = async (pos) => {
-        let geoCode = await axios.get(getLocation + pos.coords.latitude + "&lon=" + pos.coords.longitude + "&format=json")
-        // console.log("https://api.openweathermap.org/data/2.5/weather?q=" + geoCode.data.address.city + apiKeyWeather)
-        let weather = await axios.get(getWeather + geoCode.data.address.city + '&units=metric' + apiKeyWeather)
+        let geoCode = await getLocation(pos.coords.latitude, pos.coords.longitude)
+
+        let weather = await getWeather(geoCode.data.address.city, '&units=metric')
         console.log(weather)
-        props.dispatch(addLocation(weather.data.name))
-        props.dispatch(setTemperature(weather.data.main))
-        props.dispatch(setTimeSunRice(weather.data.sys))
-        // setCity(weather.data.name)
+        props.dispatch(setAllData(weather.data))
+        // props.dispatch(addLocation(weather.data.name))
+        // props.dispatch(setTemperature(weather.data.main))
+        // props.dispatch(setTimeSunRice(weather.data.sys))
+
+        // props.dispatch(setIcon(weather.data.weather[0]))
     }
     var options = {
         enableHighAccuracy: true,
@@ -45,11 +46,13 @@ let Header = (props) => {
     return (
         <header>
             <div>
-                <p>City: {props.state.location}</p>
+                <p>City: {props.state.name}</p>
                 <button onClick={showLocation}>location </button>
             </div>
+                <h1>Weather forecast</h1>
             <div>
                 <p>Localtime: {time} </p>
+                <p>Date :{date} </p>
             </div>
         </header>
     )
