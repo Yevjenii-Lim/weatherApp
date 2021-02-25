@@ -1,14 +1,12 @@
 .header {
 
-  margin: 0 auto;
-  width: 60%;
 
   /* display: flex; */
 }
 .header header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  /* display: flex; */
+  /* justify-content: space-between; */
+
   align-items: center;
   border: 3px solid green;
 }
@@ -62,7 +60,8 @@
   background-color: rgb(28, 189, 28);
 }
 .weatherCart {
-  background-color: rgb(28, 189, 28);
+align-items: center;
   text-align: center;
   padding: 1em;
+  height: 100%;
 }

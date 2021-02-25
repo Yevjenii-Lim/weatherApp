@@ -2,23 +2,22 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { addLocation, setAllData, setIcon, setTemperature, setTimeSunRice } from '../store';
 import { getIcon, getLocation, getWeather } from './DAL/api';
-
+import 'materialize-css/dist/css/materialize.min.css'
 
 let Header = (props) => {
-    let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
-    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
     let date = new Date(props.state.dt * 1000).getDate() + " " + props.state.months[new Date(props.state.dt * 1000).getMonth()] 
     let [time, setTime] = useState('')
     useEffect(async () => {
         timeReset()
-
+        showLocation()
     }, [])
 
     let success = async (pos) => {
         let geoCode = await getLocation(pos.coords.latitude, pos.coords.longitude)
 
         let weather = await getWeather(geoCode.data.address.city, '&units=metric')
-        console.log(weather)
+        // console.log(weather)
         props.dispatch(setAllData(weather.data))
         // props.dispatch(addLocation(weather.data.name))
         // props.dispatch(setTemperature(weather.data.main))
@@ -44,13 +43,13 @@ let Header = (props) => {
     
     setInterval(timeReset, 60000)
     return (
-        <header>
-            <div>
+        <header className='teal accent-3 container row center-align'>
+            <div className="col s3 ">
                 <p>City: {props.state.name}</p>
-                <button onClick={showLocation}>location </button>
+                <button onClick={showLocation} className='waves-effect waves-light btn waves-light red'>location </button>
             </div>
-                <h1>Weather forecast</h1>
-            <div>
+                <h1 className="col s6 flow-text">Weather forecast</h1>
+            <div className="col s3">
                 <p>Localtime: {time} </p>
                 <p>Date :{date} </p>
             </div>

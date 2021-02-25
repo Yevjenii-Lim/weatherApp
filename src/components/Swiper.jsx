@@ -8,6 +8,7 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
+import 'materialize-css/dist/css/materialize.min.css'
 import WeatherCard from './WeatherCard';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -22,11 +23,12 @@ let SwiperComponent = (props) => {
         <Swiper
             spaceBetween={50}
             slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
+            className="teal accent-3 container"
         >
             <SwiperSlide>
                 <WeatherCard state={props.state} months={props.state.months}></WeatherCard>
