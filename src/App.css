@@ -65,3 +65,8 @@ align-items: center;
   padding: 1em;
   height: 100%;
 }
+
+#myChart {
+  color: black;
+  font-weight: bold;
+}

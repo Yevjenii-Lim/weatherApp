@@ -1,13 +1,21 @@
-import React from 'react';
+import React from "react";
 
 let Preloader = () => {
+  return (
+    <div className="weatherCart">
+      <div className="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <p>waiting for request</p>
+    </div>
+  );
+};
 
-
-    return (
-        <div className="weatherCart"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-            <p>waiting for request</p>
-        </div>
-    )
-}
-
-export default Preloader
+export default Preloader;

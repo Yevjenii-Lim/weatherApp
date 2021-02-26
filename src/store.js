@@ -4,6 +4,7 @@ const SET_SUNRICE = "SET_SUNRICE"
 const SET_ICON = "SET_ICON"
 const SET_ALL_DATA = "SET_ALL_DATA"
 const SET_WEEKLY_DATA = "SET_WEEKLY_DATA"
+const SET_SEARCH_DATA = "SET_SEARCH_DATA"
 
 let store = {
     _state: {
@@ -17,7 +18,8 @@ let store = {
         weekly: [],
         months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
         "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-        days: ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat']
+        days: ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat'],
+        search: {}
        
     },
     getState() {
@@ -74,6 +76,13 @@ let headerReducer = (state, action) => {
                     weekly: action.data
                 }
             }
+            case SET_SEARCH_DATA: {
+                console.log(action.data.data)
+                return {
+                    ...state,
+                    search: action.data.data
+                }
+            }
             default: return state
         }
 }
@@ -84,5 +93,6 @@ export let setTimeSunRice = (sun) => ({type: SET_SUNRICE, sun})
 export let setIcon = (weather) => ({type: SET_ICON, weather});
 export let setAllData = (data) => ({type: SET_ALL_DATA, data});
 export let weeklyData = (data) => ({type: SET_WEEKLY_DATA, data})
+export let setSearchData = (data) => ({type: SET_SEARCH_DATA, data})
 
 export default store;
