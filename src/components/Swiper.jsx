@@ -13,8 +13,15 @@ import WeatherCard from "./WeatherCard";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 let SwiperComponent = (props) => {
-  let tommorow = props.state.weekly[1];
-  let afterTomorow = props.state.weekly[2];
+  let threeDaysForecast = [...props.state.weekly]
+  let daysOrder = ['Today`s', "Tomorrow", "After tomorrow"]
+  threeDaysForecast.length = 3;
+  console.log(threeDaysForecast)
+  let sliders = threeDaysForecast.map( (i, index) => {
+    return <SwiperSlide ><WeatherCard day={daysOrder[index]} state={i} months={props.state.months} name={props.state.name}></WeatherCard></SwiperSlide>
+  })
+  console.log(sliders)
+
   return (
     <Swiper
       spaceBetween={50}
@@ -26,7 +33,8 @@ let SwiperComponent = (props) => {
       scrollbar={{ draggable: true }}
       className="teal accent-3 container"
     >
-      <SwiperSlide>
+      {sliders}
+      {/* <SwiperSlide>
         <WeatherCard
           state={props.state}
           months={props.state.months}
@@ -45,7 +53,7 @@ let SwiperComponent = (props) => {
           name={props.state.name}
           months={props.state.months}
         ></WeatherCard>
-      </SwiperSlide>
+      </SwiperSlide> */}
       {/* <SwiperSlide>Slide 4</SwiperSlide> */}
     </Swiper>
   );

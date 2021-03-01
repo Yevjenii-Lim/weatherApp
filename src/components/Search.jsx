@@ -4,7 +4,6 @@ import { getWeather } from "./DAL/api";
 import WeatherCard from "./WeatherCard";
 
 let Search = (props) => {
-  console.log(props.state.search);
   let objectIsEmpty = (obj) => {
     if (Object.keys(obj).length == 0) {
       return false;
@@ -44,7 +43,7 @@ let Search = (props) => {
           months={props.state.months}
         ></WeatherCard>
       ) : (
-        <h4 className="center-align">Search Data</h4>
+        <h4 className="center-align">Start your search</h4>
       )}
     </div>
   );

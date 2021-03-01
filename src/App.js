@@ -13,20 +13,15 @@ import Search from './components/Search';
 
 function App() {
   let [showWeekly, setShowWeekly] = useState(false);
-  let setHideShow = () => {
-    setShowWeekly(!showWeekly)
-  }
+
   return (
     <div className={"header"}>
       <Header state={store.getState()} dispatch={store.dispatch.bind(store)}></Header>
-      {/* <WeatherCard state={store.getState()} dispatch={store.dispatch.bind(store)}></WeatherCard> */}
-      <SwiperComponent state={store.getState()} dispatch={store.dispatch.bind(store)}></SwiperComponent>
+      {store.getState().weekly.length > 1 ?<SwiperComponent state={store.getState()} dispatch={store.dispatch.bind(store)}></SwiperComponent> : <Preloader></Preloader> } 
       <div className='container'>
         <Week state={store.getState()} dispatch={store.dispatch.bind(store)}></Week>
-        {/* <Graph state={store.getState()}></Graph> */}
         {store.getState().weekly.length > 1 ? <Graph state={store.getState()} time="sunrise"></Graph> : <Preloader></Preloader>}
         {store.getState().weekly.length > 1 ? <Graph state={store.getState()} time="sunset"></Graph> : <Preloader></Preloader>}
-        {/* {showWeekly ? <Week state={store.getState()} dispatch={store.dispatch.bind(store)}></Week> : <button onClick={setHideShow} className="waves-effect waves-light btn waves-light red">Show Weekly</button>} */}
         <Search  state={store.getState()} dispatch={store.dispatch.bind(store)}></Search>
       </div>
     </div>

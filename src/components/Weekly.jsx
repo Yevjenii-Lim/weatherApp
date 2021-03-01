@@ -4,6 +4,7 @@ import { getWeeklyForecast } from "./DAL/api";
 import WeekItem from "./WeekItem";
 
 let Week = (props) => {
+  console.log(props)
   useEffect(async () => {
     // console.log(props.state.coord === undefined)
     if (props.state.coord === undefined) {
@@ -18,29 +19,32 @@ let Week = (props) => {
     }
   }, [props.state.coord]);
 
-  let today = new Date().getDay();
   let oneTime;
-  let days = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];
-  let checkDay = (today, target) => {
-    target = new Date(target * 1000).getDay();
-    if (today == target && oneTime === undefined) {
-      oneTime = "today";
-      return "today";
+  let checkDay = (target) => {
+    let today = new Date().getDay();
+    target = new Date(target * 1000).getDay()
+    if (today === target && oneTime === undefined) {
+      oneTime = "Today";
+      return "Today";
     } else {
-      return days[target];
+      return props.state.days[target];
     }
   };
+  window.week = props.state.weekly
   // console.log(props.state)
-  // console.log(props.state.weekly)
+  console.log(props.state)
   let items = props.state.weekly.map((i, index) => {
     return (
       <WeekItem
         key={index}
         temp={i.temp.day}
-        date={checkDay(today, i.dt)}
+        timeCode={i.dt}
+        date={checkDay(i.dt)}
         icon={i.weather[0].icon}
         sunRise={i.sunrise}
         sunSet={i.sunset}
+        weather={i.weather[0].description}
+        weatherId={i.weather[0].id}
       ></WeekItem>
     );
   });

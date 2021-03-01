@@ -43,12 +43,7 @@ let Header = (props) => {
     <header className="teal accent-3 container row center-align">
       <div className="col s3 ">
         <p>City: {props.state.name}</p>
-        <button
-          onClick={showLocation}
-          className="waves-effect waves-light btn waves-light red"
-        >
-          location{" "}
-        </button>
+  
       </div>
       <h1 className="col s6 flow-text">Weather forecast</h1>
       <div className="col s3">

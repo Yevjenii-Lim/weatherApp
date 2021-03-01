@@ -18,7 +18,7 @@ let store = {
         weekly: [],
         months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
         "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-        days: ['sun', 'mon', 'tues', 'wed', 'thurs', 'fri', 'sat'],
+        days: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
         search: {}
        
     },

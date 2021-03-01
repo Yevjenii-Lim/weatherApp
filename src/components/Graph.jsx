@@ -4,7 +4,6 @@ import Chart from "chart.js";
 let myLineChart;
 class Graph extends React.Component {
   chartRef = React.createRef();
-  // weeklySunrise = this.props.state.weekly.map(i => new Date(i.sunrise * 1000).getHours() + ":" + new Date(i.sunrise * 1000).getMinutes())
   componentDidMount() {
     this.buildChart();
   }
@@ -42,7 +41,6 @@ class Graph extends React.Component {
     }
 
     const myChartRef = this.chartRef.current.getContext("2d");
-    // if (typeof myLineChart !== "undefined") myLineChart.destroy();
     myLineChart = new Chart(myChartRef, {
       type: "line",
       data: {
@@ -55,10 +53,6 @@ class Graph extends React.Component {
             fill: false,
             borderColor: color,
           },
-          // {
-          //     label: "Sun schedule",
-          //     data: weeklySunset,
-          // }
         ],
       },
       options: {
