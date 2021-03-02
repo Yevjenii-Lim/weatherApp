@@ -5,7 +5,7 @@ import "./../preloader.css";
 import Preloader from "./Preloader";
 
 let WeatherCard = (props) => {
-  console.log(props);
+  // console.log(props);
   if (props.state === undefined) return <Preloader></Preloader>;
 
   let day =
@@ -35,7 +35,7 @@ let WeatherCard = (props) => {
   let sunRiceTime = date.getHours() + ":" + date.getMinutes();
   let sunSetTime = sunSetDate.getHours() + ":" + sunSetDate.getMinutes();
   let url = getIcon(icon);
-  console.log(props.state);
+  // console.log(props.state);
   let turn = (props.state.uvi * 100) / 12 / 160;
   let humidityEsteem 
   switch (true) {

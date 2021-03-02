@@ -1,23 +1,10 @@
 import React, { useEffect } from "react";
 import { weeklyData } from "../store";
 import { getWeeklyForecast } from "./DAL/api";
+import Preloader from "./Preloader";
 import WeekItem from "./WeekItem";
 
 let Week = (props) => {
-  console.log(props)
-  useEffect(async () => {
-    // console.log(props.state.coord === undefined)
-    if (props.state.coord === undefined) {
-      return null;
-    } else {
-      let week = await getWeeklyForecast(
-        props.state.coord.lon,
-        props.state.coord.lat
-      );
-      // console.log(week)
-      props.dispatch(weeklyData(week.data.daily));
-    }
-  }, [props.state.coord]);
 
   let oneTime;
   let checkDay = (target) => {
@@ -31,12 +18,11 @@ let Week = (props) => {
     }
   };
   window.week = props.state.weekly
-  // console.log(props.state)
-  console.log(props.state)
+// console.log(props.state.weekly)
   let items = props.state.weekly.map((i, index) => {
     return (
       <WeekItem
-        key={index}
+        key={i.id}
         temp={i.temp.day}
         timeCode={i.dt}
         date={checkDay(i.dt)}
@@ -45,12 +31,13 @@ let Week = (props) => {
         sunSet={i.sunset}
         weather={i.weather[0].description}
         weatherId={i.weather[0].id}
+        id={i.id}
       ></WeekItem>
     );
   });
   // console.log(items )
   return (
-    <div className="">
+    <div className="" >
       <h2>Weather Forecast for the next week</h2>
       {/* <WeekItem temp='12312'></WeekItem> */}
       <div className="weekRow">{items}</div>

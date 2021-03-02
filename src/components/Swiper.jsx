@@ -16,11 +16,11 @@ let SwiperComponent = (props) => {
   let threeDaysForecast = [...props.state.weekly]
   let daysOrder = ['Today`s', "Tomorrow", "After tomorrow"]
   threeDaysForecast.length = 3;
-  console.log(threeDaysForecast)
+
   let sliders = threeDaysForecast.map( (i, index) => {
-    return <SwiperSlide ><WeatherCard day={daysOrder[index]} state={i} months={props.state.months} name={props.state.name}></WeatherCard></SwiperSlide>
+    return <SwiperSlide key={index} ><WeatherCard day={daysOrder[index]} state={i} months={props.state.months} name={props.state.name}></WeatherCard></SwiperSlide>
   })
-  console.log(sliders)
+
 
   return (
     <Swiper
@@ -34,27 +34,6 @@ let SwiperComponent = (props) => {
       className="teal accent-3 container"
     >
       {sliders}
-      {/* <SwiperSlide>
-        <WeatherCard
-          state={props.state}
-          months={props.state.months}
-        ></WeatherCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <WeatherCard
-          state={tommorow}
-          name={props.state.name}
-          months={props.state.months}
-        ></WeatherCard>
-      </SwiperSlide>
-      <SwiperSlide>
-        <WeatherCard
-          state={afterTomorow}
-          name={props.state.name}
-          months={props.state.months}
-        ></WeatherCard>
-      </SwiperSlide> */}
-      {/* <SwiperSlide>Slide 4</SwiperSlide> */}
     </Swiper>
   );
 };

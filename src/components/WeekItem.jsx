@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "./context";
 import { getIcon } from "./DAL/api";
+
 
 let WeekItem = (props) => {
   let time =
@@ -19,20 +21,23 @@ let WeekItem = (props) => {
     new Date(props.sunSet * 1000).getMinutes();
   let backgroundColor;
 
-  switch (props.weatherId) {
-    case 800: {
+  switch (true) {
+    case props.weatherId > 500 && props.weatherId < 531: {
+      backgroundColor = "blue darken-3"
+    }
+    case 800 === props.weatherId: {
       backgroundColor = "orange lighten-1";
       break;
     }
-    case 803: {
+    case props.weatherId > 800: {
       backgroundColor = "grey darken-1";
       break;
     }
-    case 802: {
+    case 801: {
       backgroundColor = "grey lighten-1";
       break;
     }
-    case 600: {
+    case props.weatherId === 600: {
       backgroundColor = "blue lighten-1";
       break;
     }
@@ -40,9 +45,11 @@ let WeekItem = (props) => {
       backgroundColor = null;
     }
   }
+   let {hideHandler} = useContext(AppContext)
+// console.log(props.id)
   // (props.weatherId === 800) ? backgroundColor = "orange lighten-1" :backgroundColor = null
   return (
-    <div className={"weekItem" + " " + backgroundColor}>
+    <div className={"weekItem" + " " + backgroundColor} onClick={() => hideHandler(props.id)}>
       <h3 className="weekItem__title">
         <p>{time} </p> <p className="weekItem__date">{props.date}</p>{" "}
       </h3>
@@ -65,6 +72,7 @@ let WeekItem = (props) => {
         </div>
         <p className="sunsetTime__title">{sunSet}</p>
       </div>
+ 
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { setAllData } from "../store";
-import { getIcon, getLocation, getWeather } from "./DAL/api";
+import { setAllData, weeklyData } from "../store";
+import { getIcon, getLocation, getWeather, getWeeklyForecast } from "./DAL/api";
 import "materialize-css/dist/css/materialize.min.css";
 
 let Header = (props) => {
@@ -13,14 +13,25 @@ let Header = (props) => {
   useEffect(async () => {
     timeReset();
     showLocation();
+  
   }, []);
 
   let success = async (pos) => {
+    console.log("location")
     let geoCode = await getLocation(pos.coords.latitude, pos.coords.longitude);
 
     let weather = await getWeather(geoCode.data.address.city, "&units=metric");
-
+    console.log(weather.data)
     props.dispatch(setAllData(weather.data));
+    // console.log(props.state)
+    let week = await getWeeklyForecast(
+      weather.data.coord.lon,
+      weather.data.coord.lat,
+    );
+    week.data.daily.forEach((i,index) => i.id = index)
+  
+    
+    props.dispatch(weeklyData(week.data.daily)); 
   };
   var options = {
     enableHighAccuracy: true,

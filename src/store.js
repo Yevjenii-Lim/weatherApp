@@ -19,7 +19,8 @@ let store = {
         months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", 
         "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
         days: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
-        search: {}
+        search: {},
+        isWeatherLoaded: false
        
     },
     getState() {
@@ -71,8 +72,10 @@ let headerReducer = (state, action) => {
                 }
             }
             case SET_WEEKLY_DATA : {
+               
                 return {
                     ...state,
+                    isWeatherLoaded: true,
                     weekly: action.data
                 }
             }

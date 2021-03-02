@@ -58,7 +58,7 @@
   border-radius: 5px;
   background-color: rgb(28, 189, 28);
   box-sizing: border-box;
-  z-index: -10;
+  /* z-index: -10; */
 }
 .weekItem__date {
   color: white;
@@ -72,6 +72,7 @@
 }
 .swiper-container {
   border-radius: 10px;
+  width: 100%!important;
 }
 .weatherCard__img img {
   width: 100px;
@@ -256,4 +257,54 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+}
+
+.location__title {
+  background-color: brown;
+  color: white;
+  position: absolute;
+  width: 100px;
+  text-align: center;
+  border-radius: 20px;
+  padding: 5px;
+  left: 0;
+  top: 0;
+}
+
+.search-card {
+  padding: 10px;
+  position: relative;
+  display: flex;
+  background-color: coral;
+  justify-content: space-around;
+}
+.search-card__temp {
+  font-size: 2.4em;
+}
+.search-card__icon {
+  text-align: center;
+}
+
+.modal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0, 0, 0.1);
+  z-index: 100;
+  display: none;
+}
+.show {
+  display: block;
+}
+.modal-content {
+  background-color: white;
+  width: 200px;
+  z-index: 101;
+  height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

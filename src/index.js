@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import AppContext from './components/context';
 
-let reRender = () => {
+let ReRender = () => {
+
   ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+    ,
   document.getElementById('root')
 );
 }
-reRender();
-store.subscriber(reRender)
+ReRender();
+store.subscriber(ReRender)
 
 
 

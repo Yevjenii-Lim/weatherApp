@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { setSearchData } from "../store";
 import { getWeather } from "./DAL/api";
+import SearchCard from "./SearchCard";
 import WeatherCard from "./WeatherCard";
 
 let Search = (props) => {
@@ -38,10 +39,10 @@ let Search = (props) => {
         </div>
       </div>
       {objectIsEmpty(props.state.search) ? (
-        <WeatherCard
+        <SearchCard
           state={props.state.search}
           months={props.state.months}
-        ></WeatherCard>
+        ></SearchCard>
       ) : (
         <h4 className="center-align">Start your search</h4>
       )}

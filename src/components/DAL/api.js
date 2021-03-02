@@ -16,9 +16,10 @@ let instance = axios.create({
 })
 
 export let getWeather = (city, units) => {
-    console.log(weather + city + units + API_KEY)
+    // console.log(weather + city + units + API_KEY)
     return axios.get(weather  + city + units  + API_KEY)
 }
+
 export let getWeeklyForecast = (lat, long) => {
     return axios.get(daylyForecast + `lat=${long}&lon=${lat}&exclude=hourly,minutely&` + '&units=metric' + API_KEY)
 }
