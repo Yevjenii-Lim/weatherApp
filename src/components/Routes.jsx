@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import Modal  from './Modal';
+import React, { useContext, useEffect } from 'react';
 import store, { weeklyData } from '../store';
 import Graph from './Graph';
 import Preloader from './Preloader';
 import Search from './Search';
 import SwiperComponent from './Swiper';
 import Week from './Weekly';
+import AppContext from './context';
 
 
 let Routes = ({isWeatherLoaded, setShowHide}) => {
+    let {showHideModal} = useContext(AppContext)
 
     if(isWeatherLoaded) {
         return (
@@ -17,6 +20,7 @@ let Routes = ({isWeatherLoaded, setShowHide}) => {
            <Graph state={store.getState()} time="sunrise"></Graph>
            <Graph state={store.getState()} time="sunset"></Graph>
             <Search  state={store.getState()} dispatch={store.dispatch.bind(store)}></Search>
+           {showHideModal ? <Modal ></Modal> : null} 
             </div>
         )
     }else {

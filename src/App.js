@@ -19,16 +19,18 @@ import AppContext from './components/context';
 
 function App() {
   let [showHideModal, setShowHide] = useState(false)
-  let [weatherModal, setData] = useState({})
+  let [weatherModal, setData] = useState({temp:{'hello': 1}})
   let hideHandler = (id) => {
  
     setShowHide(!showHideModal)
     let itemId = store.getState().weekly.findIndex(i => i.id === id)
+
+      setData(store.getState().weekly[itemId])
+   
     // console.log(store.getState().weekly[itemId])
-    setData(store.getState().weekly[itemId])
   } 
   return (
-   <AppContext.Provider value={{ hideHandler}}>
+   <AppContext.Provider value={{ hideHandler, showHideModal, weatherModal,setShowHide}}>
 
     <div className={"header"}>
 
@@ -40,7 +42,7 @@ function App() {
         {store.getState().weekly.length > 1 ? <Graph state={store.getState()} time="sunrise"></Graph> : <Preloader></Preloader>}
         {store.getState().weekly.length > 1 ? <Graph state={store.getState()} time="sunset"></Graph> : <Preloader></Preloader>}
       <Search  state={store.getState()} dispatch={store.dispatch.bind(store)}></Search> */}
-       <Modal state={weatherModal} showHideModal={showHideModal} setShowHide={setShowHide}></Modal>
+       {/* <Modal state={weatherModal} showHideModal={showHideModal} setShowHide={setShowHide}></Modal> */}
     </div>
       </AppContext.Provider>
     
