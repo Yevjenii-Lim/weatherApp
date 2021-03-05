@@ -1,17 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import store from './store';
-import WeatherCard from './components/WeatherCard';
-import Week from './components/Weekly';
-import { useContext, useState } from 'react';
-import SwiperComponent from './components/Swiper';
+import {  useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css'
-import Graph from './components/Graph';
-import Preloader from './components/Preloader';
-import Search from './components/Search';
 import Routes from './components/Routes';
-import Modal from "./components/Modal";
 import AppContext from './components/context';
 
 
@@ -24,13 +16,11 @@ function App() {
  
     setShowHide(!showHideModal)
     let itemId = store.getState().weekly.findIndex(i => i.id === id)
-
-      setData(store.getState().weekly[itemId])
-   
-    // console.log(store.getState().weekly[itemId])
+    setData(store.getState().weekly[itemId])
   } 
+  let state = store.getState()
   return (
-   <AppContext.Provider value={{ hideHandler, showHideModal, weatherModal,setShowHide}}>
+   <AppContext.Provider value={{ hideHandler, showHideModal, weatherModal,setShowHide, state}}>
 
     <div className={"header"}>
 

@@ -4,6 +4,7 @@ import axios from "axios";
 let daylyForecast = 'https://api.openweathermap.org/data/2.5/onecall?';
 let weather = "https://api.openweathermap.org/data/2.5/weather?q="
 let API_KEY = "&appid=f8705a4ac77ebcd799c4a23561fad49d";
+let holiDay = "https://getfestivo.com/v2/holidays?api_key=d01d972024e5c3a62805568ab29bc87e"
 
 let instance = axios.create({
     withCredentials: true,
@@ -33,6 +34,10 @@ export let getIcon = (id) => {
     }else  {
         return false
     }
-    // !!id ? return `http://openweathermap.org/img/wn/${id}@2x.png` : return false
-    // return `http://openweathermap.org/img/wn/${id}@2x.png`
+}
+
+export const getHoliday = (country, year, mounth, day) => {
+    let options = "&country=us&year=2020&month=06&day=01"
+    // console.log(`${holiDay}&country=${country}&year=${2020}&month=${mounth}&day=${day}`)
+    return axios.get(`${holiDay}&country=${country}&year=${2020}&month=${mounth}&day=${day}`)
 }

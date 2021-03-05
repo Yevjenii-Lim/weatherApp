@@ -5,7 +5,7 @@ import Preloader from "./Preloader";
 import WeekItem from "./WeekItem";
 
 let Week = (props) => {
-
+  
   let oneTime;
   let checkDay = (target) => {
     let today = new Date().getDay();
@@ -23,7 +23,7 @@ let Week = (props) => {
     return (
       <WeekItem
         key={i.id}
-        temp={i.temp.day}
+        temp={i.temp}
         timeCode={i.dt}
         date={checkDay(i.dt)}
         icon={i.weather[0].icon}

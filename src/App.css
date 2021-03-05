@@ -107,8 +107,9 @@
   font-size: 1.5em;
 }
 .weekItem__weather {
-  text-transform: uppercase;
-  font-weight: bold;
+
+  font-weight: 500;
+  text-align: center;
 }
 .horizontal-line {
   width: 100%;
@@ -293,14 +294,13 @@
   height: 100vh;
   background-color: rgba(0,0, 0, 0.1);
   z-index: 100;
-  display: none;
+
 }
 .modal-content {
   background-color: white;
   width: 500px;
-  height: 500px;
   z-index: 101;
-
+  padding: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -310,10 +310,23 @@
   display: block;
   
 }
+.hide-own {
+  animation-name: hide;
+  animation-duration: 2s;
+}
+
+@keyframes hide {
+  0% {
+    display: block;
+  }
+  100% {
+    display: none;
+  }
+}
 .growWindow {
   transform: translate(-50%, -50%);
   animation-name: grow;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   transform-origin: 0%  0%;
 }
 @keyframes grow {
@@ -323,4 +336,20 @@
   100% {
     transform: scale(1) translate(-50%, -50%);
   }
+}
+
+.shirink {
+  transform: translate(-50%, -50%);
+  animation-name: shrink;
+  animation-duration: 1s;
+  transform-origin: 0%  0%;
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(1) translate(-50%, -50%);
+   }
+   100% {
+     transform: scale(0) translate(-50%, -50%);
+   }
 }
