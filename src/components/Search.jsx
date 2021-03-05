@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { setSearchData } from "../store";
 import { getWeather } from "./DAL/api";
 import SearchCard from "./SearchCard";
-import WeatherCard from "./WeatherCard";
+
 
 let Search = (props) => {
   let objectIsEmpty = (obj) => {
