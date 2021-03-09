@@ -18,10 +18,8 @@ let setBackgroundColor = (weatherId) => {
     case weatherId > 800: {
       return "grey darken-1";
     }
-    case 801: {
-      return "grey lighten-1";
-    }
-    case weatherId === 600: {
+
+    case weatherId > 599 && weatherId < 623: {
       return "blue lighten-1";
     }
     default: {

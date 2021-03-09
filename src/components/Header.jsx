@@ -1,64 +1,54 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { setAllData, weeklyData } from "../store";
-import { getIcon, getLocation, getWeather, getWeeklyForecast } from "./DAL/api";
+import {getLocation, getWeather, getWeeklyForecast } from "./DAL/api";
 import "materialize-css/dist/css/materialize.min.css";
 
-let Header = (props) => {
-  let date =
-    new Date(props.state.dt * 1000).getDate() +
-    " " +
-    props.state.months[new Date(props.state.dt * 1000).getMonth()];
-  let [time, setTime] = useState("");
-  useEffect(async () => {
 
+
+let success = async (pos, props) => {
+  let geoCode = await getLocation(pos.coords.latitude, pos.coords.longitude);
+  let weather = await getWeather(geoCode.data.address.city, "&units=metric");
+  props.dispatch(setAllData(weather.data));
+  let week = await getWeeklyForecast(
+    weather.data.coord.lon,
+    weather.data.coord.lat,
+  );
+  week.data.daily.forEach((i,index) => i.id = index)
+  props.dispatch(weeklyData(week.data.daily)); 
+};
+
+let error = async (e, props) => {
+  console.log(e.message)
+  let weather = await getWeather("Kiev", "&units=metric");
+  props.dispatch(setAllData(weather.data));
+  let week = await getWeeklyForecast(
+    weather.data.coord.lon,
+    weather.data.coord.lat,
+  );
+  week.data.daily.forEach((i,index) => i.id = index)
+  props.dispatch(weeklyData(week.data.daily)); 
+};
+
+
+let Header = (props) => {
+  let timeStamp = props.state.dt * 1000
+  let mounthNumber = new Date(timeStamp).getMonth()
+  let date = new Date(timeStamp).getDate() + " " + props.state.months[mounthNumber];
+
+  useEffect(async () => {
     showLocation();
-  
   }, []);
 
-  let success = async (pos) => {
-    console.log(pos.coords.latitude, pos.coords.longitude)
-    let geoCode = await getLocation(pos.coords.latitude, pos.coords.longitude);
 
-    let weather = await getWeather(geoCode.data.address.city, "&units=metric");
-    console.log(weather.data)
-    props.dispatch(setAllData(weather.data));
-    // console.log(props.state)
-    let week = await getWeeklyForecast(
-      weather.data.coord.lon,
-      weather.data.coord.lat,
-    );
-    week.data.daily.forEach((i,index) => i.id = index)
-  
-    
-    props.dispatch(weeklyData(week.data.daily)); 
-  };
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0,
   };
-  let error = async (e) => {
-    
-    console.log(e.message)
-//     let geoCode = await getLocation(50.431759, 30.517023);
-// console.log(geoCode)
-    let weather = await getWeather("Kiev", "&units=metric");
-    console.log(weather.data)
-    props.dispatch(setAllData(weather.data));
-    // console.log(props.state)
-    let week = await getWeeklyForecast(
-      weather.data.coord.lon,
-      weather.data.coord.lat,
-    );
-    week.data.daily.forEach((i,index) => i.id = index)
-  
-    
-    props.dispatch(weeklyData(week.data.daily)); 
-  
-  };
+
   let showLocation = () => {
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    navigator.geolocation.getCurrentPosition((pos)=> success(pos,props),(e) => error(e,props), options);
   };
   // console.log(time.getHours())
 
